@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -14,12 +16,19 @@ import android.widget.TextView;
 public class PlacesActivity extends Activity {
 
 	private ArrayList<String> plaatsen = new ArrayList<String>();
-	
+	private OnClickListener clickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent myIntent = new Intent(PlacesActivity.this, MenuActivity.class);
+	        startActivity(myIntent);
+			
+		}
+	};
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.places);
-		Log.d("activity", "oncreate places");
-
+	
 	}
 	
 	public void onResume(){
@@ -40,6 +49,7 @@ public class PlacesActivity extends Activity {
 			TextView tekst = new TextView(this);
 			tekst.setText(plaats);
 			tekst.setTextSize(20);
+			tekst.setOnClickListener((android.view.View.OnClickListener) clickListener);
 			ScrollView sv = (ScrollView) findViewById(R.id.scrollView1);
 			lo.addView(tekst);
 
