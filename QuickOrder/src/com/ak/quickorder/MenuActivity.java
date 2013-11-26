@@ -12,7 +12,7 @@ public class MenuActivity extends Activity {
 		setContentView(R.layout.menu);
 
 	}
-
+//testcommit
 	public void onResume() {
 		TabHost host = (TabHost) findViewById(R.id.tab_host);
 		host.setup();
