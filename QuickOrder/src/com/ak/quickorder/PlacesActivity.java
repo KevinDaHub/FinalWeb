@@ -30,10 +30,6 @@ public class PlacesActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.places);
-
-	}
-
-	public void onResume() {
 		plaatsen.add("R1");
 		plaatsen.add("R2");
 		plaatsen.add("R3");
@@ -48,6 +44,11 @@ public class PlacesActivity extends Activity {
 		plaatsen.add("R5");
 
 		addList();
+
+	}
+
+	public void onResume() {
+
 		super.onResume();
 	}
 

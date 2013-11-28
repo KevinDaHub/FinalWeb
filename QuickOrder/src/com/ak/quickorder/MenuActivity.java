@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class MenuActivity extends Activity {
 
 	private ArrayList<String> lijst;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,28 +36,29 @@ public class MenuActivity extends Activity {
 		lijst.add("random");
 		lijst.add("random");
 		lijst.add("random");
-		
-	}
-	
-	public void onResume(){
 		TableLayout menulist = (TableLayout) findViewById(R.id.menulist);
-		for(String drank : lijst){
+		for (String drank : lijst) {
 			TableRow row = new TableRow(this);
 			TextView tekst = new TextView(this);
 			tekst.setText(drank);
 			row.addView(tekst);
-			
+
 			Button plus = new Button(this);
 			plus.setText("plus");
 			row.addView(plus);
-			
+
 			Button min = new Button(this);
 			min.setText("min");
 			row.addView(min);
-			
+
 			menulist.addView(row);
-			super.onResume();
-			
+
 		}
+
+	}
+
+	public void onResume() {
+
+		super.onResume();
 	}
 }
