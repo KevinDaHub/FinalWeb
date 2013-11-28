@@ -20,7 +20,7 @@ public class PlacesActivity extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			Intent myIntent = new Intent(PlacesActivity.this, MenuActivity.class);
+			Intent myIntent = new Intent(PlacesActivity.this, TabLayoutActivity.class);
 	        startActivity(myIntent);
 			
 		}
