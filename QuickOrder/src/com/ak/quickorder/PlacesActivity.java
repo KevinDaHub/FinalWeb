@@ -64,7 +64,10 @@ public class PlacesActivity extends Activity {
 		}
 	}
 
-	private void updateList(View view) {
-		addList();
+	public void finish(){
+		Intent intent = new Intent();
+		setResult(RESULT_OK, intent);
+		super.finish();
+		
 	}
 }

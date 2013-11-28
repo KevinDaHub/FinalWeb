@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
-        android:onClick="updateList"
+        android:onClick="finish"
         android:src="@android:drawable/ic_menu_revert" />
 
 </LinearLayout>

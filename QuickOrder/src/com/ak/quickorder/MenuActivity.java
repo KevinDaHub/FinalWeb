@@ -3,6 +3,7 @@ package com.ak.quickorder;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -60,5 +61,11 @@ public class MenuActivity extends Activity {
 	public void onResume() {
 
 		super.onResume();
+	}
+	public void finish(){
+		Intent intent = new Intent();
+		setResult(RESULT_OK, intent);
+		super.finish();
+		
 	}
 }
