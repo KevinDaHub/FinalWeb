@@ -23,6 +23,19 @@ public class MenuActivity extends Activity {
 		lijst.add("Stella");
 		lijst.add("heinekenyuk");
 		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		lijst.add("random");
+		
 	}
 	
 	public void onResume(){
