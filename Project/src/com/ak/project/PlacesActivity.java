@@ -1,4 +1,4 @@
-package com.ak.quickorder;
+package com.ak.project;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class PlacesActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent myIntent = new Intent(PlacesActivity.this,
-					TabLayoutActivity.class);
+					TabActivity.class);
 			startActivity(myIntent);
 
 		}
