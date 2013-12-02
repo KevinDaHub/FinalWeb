@@ -6,10 +6,4 @@
     android:layout_margin="5dp"
     android:layout_weight="0.40" >
 
-    <TableLayout
-        android:id="@+id/menulist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </TableLayout>
-
 </ScrollView>
