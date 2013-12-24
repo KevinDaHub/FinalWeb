@@ -22,6 +22,7 @@ public class MenuFragment extends Fragment {
 
 		View rootView = inflater
 				.inflate(R.layout.menu_layout, container, false);
+		
 
 		ArrayList<String> items = new ArrayList<String>();
 		items.add("Stella");

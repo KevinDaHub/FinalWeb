@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class JSONParser {
+public class JSONParser implements Serializable{
 
 	static InputStream is = null;
 	static JSONObject jObj = null;
@@ -55,14 +56,22 @@ public class JSONParser {
 				}
 
 			} else if (method == "GET") {
-				DefaultHttpClient httpClient = new DefaultHttpClient();
-				String paramString = URLEncodedUtils.format(params, "utf-8");
-				// url += "?" + paramString;
-				// HttpGet httpGet = new HttpGet(url);
+				URI address;
+				try {
+					address = new URI("http", null, "81.165.30.97", 8080, file,
+							null, null);
+					DefaultHttpClient httpClient = new DefaultHttpClient();
+					String paramString = URLEncodedUtils.format(params, "utf-8");
+					HttpGet httpGet = new HttpGet(address);
 
-				// HttpResponse httpResponse = httpClient.execute(httpGet);
-				// HttpEntity httpEntity = httpResponse.getEntity();
-				// is = httpEntity.getContent();
+					HttpResponse httpResponse = httpClient.execute(httpGet);
+					HttpEntity httpEntity = httpResponse.getEntity();
+					is = httpEntity.getContent();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 
 		} catch (UnsupportedEncodingException e) {

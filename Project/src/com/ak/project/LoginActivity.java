@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
 	private Quickorder quickorder;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,12 +34,16 @@ public class LoginActivity extends Activity {
 		EditText passwordfield = (EditText) findViewById(R.id.editText2);
 		String password = passwordfield.getText().toString();
 		String login = quickorder.login(name, password);
-		if(login.equals("ok")){
-		Intent myIntent = new Intent(this, PlacesActivity.class);
-		startActivity(myIntent);}
-		else{ 
-			Toast.makeText(getApplicationContext(), login, 
-					   Toast.LENGTH_LONG).show();
+		if (login.equals("ok")) {
+			quickorder.importClubs();
+			Intent myIntent = new Intent(this, PlacesActivity.class);
+			Bundle data = new Bundle();
+			data.putSerializable("quickorder", quickorder);
+			myIntent.putExtras(data);
+			startActivity(myIntent);
+		} else {
+			Toast.makeText(getApplicationContext(), login, Toast.LENGTH_LONG)
+					.show();
 		}
 
 	}

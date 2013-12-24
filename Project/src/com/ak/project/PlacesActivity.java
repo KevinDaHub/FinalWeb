@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -13,12 +14,18 @@ import android.widget.TextView;
 public class PlacesActivity extends Activity {
 
 	private ArrayList<String> plaatsen = new ArrayList<String>();
+	private Quickorder quickorder;
+
 	private OnClickListener clickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			Intent myIntent = new Intent(PlacesActivity.this,
-					TabActivity.class);
+			quickorder.setMenuList(((TextView) v).getText().toString());
+			Intent myIntent = new Intent(PlacesActivity.this, TabActivity.class);
+			Bundle data = new Bundle();
+			data.putSerializable("quickorder", quickorder);
+			myIntent.putExtras(data);
+			startActivity(myIntent);
 			startActivity(myIntent);
 
 		}
@@ -27,24 +34,17 @@ public class PlacesActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.places);
-		plaatsen.add("R1");
-		plaatsen.add("R2");
-		plaatsen.add("R3");
-		plaatsen.add("R4");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-		plaatsen.add("R5");
-
+		Intent i = getIntent();
+		Bundle data = i.getExtras();
+		quickorder = (Quickorder) data.getSerializable("quickorder");
+		quickorder.importClubs();
+		plaatsen = quickorder.getClubs();
 		addList();
 
 	}
 
 	public void onResume() {
+
 
 		super.onResume();
 	}
@@ -61,10 +61,10 @@ public class PlacesActivity extends Activity {
 		}
 	}
 
-	public void finish(){
+	public void finish() {
 		Intent intent = new Intent();
 		setResult(RESULT_OK, intent);
 		super.finish();
-		
+
 	}
 }

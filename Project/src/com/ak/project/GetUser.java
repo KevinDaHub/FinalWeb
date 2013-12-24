@@ -1,5 +1,6 @@
 package com.ak.project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +14,8 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class Database extends AsyncTask<String, String, String> {
+public class GetUser extends AsyncTask<String, String, String> implements
+		Serializable {
 
 	private String url_get_user = "/get_user.php";
 	private JSONParser jParser = new JSONParser();
@@ -23,12 +25,13 @@ public class Database extends AsyncTask<String, String, String> {
 	private User user;
 	private JSONObject json;
 
-	public Database(String name, String password) {
-		this.name = name;
-		this.password = password;
+	public GetUser() {
+
 	}
 
-	public User getuser() {
+	public User getuser(String name, String password) {
+		this.name = name;
+		this.password = password;
 		try {
 			this.execute().get();
 		} catch (InterruptedException e) {

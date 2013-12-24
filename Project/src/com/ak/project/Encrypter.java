@@ -1,11 +1,12 @@
 package com.ak.project;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import android.util.Log;
 
-public class Encrypter {
+public class Encrypter implements Serializable{
 
 	String salt = "sutyvqnpsoeij,qoeiosUQEGHRUEHueh<uohOUEHtUehfOUeht126546randomshizzlesalt";
 

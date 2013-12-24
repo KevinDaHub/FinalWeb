@@ -41,8 +41,6 @@ public class TabActivity extends FragmentActivity implements TabListener {
 
 			@Override
 			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
 				actionbar.setSelectedNavigationItem(position);
 			}
 
@@ -59,7 +57,6 @@ public class TabActivity extends FragmentActivity implements TabListener {
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -71,7 +68,6 @@ public class TabActivity extends FragmentActivity implements TabListener {
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 
 	}
 
