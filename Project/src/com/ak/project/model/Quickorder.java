@@ -1,7 +1,11 @@
-package com.ak.project;
+package com.ak.project.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import com.ak.project.db.Encrypter;
+import com.ak.project.db.GetClubs;
+import com.ak.project.db.GetUser;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -28,15 +32,34 @@ public class Quickorder implements Serializable {
 		}
 		return login;
 	}
+	public String getCurrentSaldo(){
+		return ""+user.getSaldo();
+	}
+	public String getTotal(){
+		return ""+ selectedClub.getTotal();
+	}
+
+	public String min(String naam) {
+		String saldo;
+		saldo = "" + selectedClub.decreaseBestelling(naam);
+		return saldo;
+	}
+
+	public String plus(String naam) {
+		String saldo;
+		saldo = "" + selectedClub.increaseBestelling(naam);
+		return saldo;
+	}
 
 	public void importClubs() {
 		GetClubs clubsdb = new GetClubs();
 		clubs = clubsdb.getclubs();
-		
+
 	}
-	public void setMenuList(String naam){
-		for(Club club : clubs){
-			if(club.getNaam().equals(naam)){
+
+	public void setMenuList(String naam) {
+		for (Club club : clubs) {
+			if (club.getNaam().equals(naam)) {
 				selectedClub = club;
 				selectedClub.importMenuList();
 			}
@@ -45,7 +68,7 @@ public class Quickorder implements Serializable {
 
 	public ArrayList<String> getClubs() {
 		ArrayList<String> clubnamen = new ArrayList<String>();
-		for(Club club : clubs){
+		for (Club club : clubs) {
 			clubnamen.add(club.getNaam());
 		}
 		return clubnamen;

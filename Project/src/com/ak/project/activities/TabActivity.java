@@ -1,14 +1,24 @@
-package com.ak.project;
+package com.ak.project.activities;
 
 import java.util.ArrayList;
+
+import com.ak.project.R;
+import com.ak.project.R.id;
+import com.ak.project.R.layout;
+import com.ak.project.model.Beverage;
+import com.ak.project.model.Quickorder;
+import com.ak.project.view.TabPagerAdapter;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.textservice.TextInfo;
+import android.widget.TextView;
 
 public class TabActivity extends FragmentActivity implements TabListener {
 
@@ -16,11 +26,16 @@ public class TabActivity extends FragmentActivity implements TabListener {
 	private ActionBar actionbar;
 	private TabPagerAdapter adapter;
 	private ArrayList<String> tabs = new ArrayList<String>();
+	private Quickorder quickorder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tabs);
+		Intent i = getIntent();
+		Bundle data = i.getExtras();
+		quickorder = (Quickorder) data.getSerializable("quickorder");
+		quickorder.importClubs();
 		tabs.add("Beer");
 		tabs.add("Wine");
 		tabs.add("Strong");
@@ -52,9 +67,14 @@ public class TabActivity extends FragmentActivity implements TabListener {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
+		setSaldo();
 
 	}
 
+	
+	public ArrayList<Beverage> getMenu(){
+		return quickorder.getSelectedClub().getMenu();
+	}
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 
@@ -70,5 +90,24 @@ public class TabActivity extends FragmentActivity implements TabListener {
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 
 	}
+	
+	public String min(String naam){
+		return quickorder.min(naam);
+	}
+	public String plus(String naam){
+		return quickorder.plus(naam);
+	}
+	public void setSaldo(){
+		TextView saldo = (TextView) findViewById(R.id.vsaldo);
+		saldo.setText("€ " + quickorder.getCurrentSaldo());
+		saldo.invalidate();
+	}
+	
+	public void setTotal(){
+		TextView total = (TextView) findViewById(R.id.vtotal);
+		total.setText("€ " + quickorder.getTotal());
+		total.invalidate();
+	}
+	
 
 }

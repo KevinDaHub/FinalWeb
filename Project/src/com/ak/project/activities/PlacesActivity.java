@@ -1,6 +1,11 @@
-package com.ak.project;
+package com.ak.project.activities;
 
 import java.util.ArrayList;
+
+import com.ak.project.R;
+import com.ak.project.R.id;
+import com.ak.project.R.layout;
+import com.ak.project.model.Quickorder;
 
 import android.app.Activity;
 import android.content.Intent;

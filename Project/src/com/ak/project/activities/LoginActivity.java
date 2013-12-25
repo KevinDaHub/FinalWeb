@@ -1,4 +1,10 @@
-package com.ak.project;
+package com.ak.project.activities;
+
+import com.ak.project.R;
+import com.ak.project.R.id;
+import com.ak.project.R.layout;
+import com.ak.project.R.menu;
+import com.ak.project.model.Quickorder;
 
 import android.os.Bundle;
 import android.app.Activity;

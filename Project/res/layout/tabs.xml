@@ -7,65 +7,59 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="wrap_content"
-        android:layout_height="455dp" >
+        android:layout_height="408dp" >
     </android.support.v4.view.ViewPager>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" 
-        android:gravity="bottom">
-
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:onClick="finish"
-            android:src="@android:drawable/ic_menu_revert" />
+        android:gravity="bottom"
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/vtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/total"
+            android:layout_alignLeft="@+id/total"
+            android:text="€ 0.00" />
+
+        <TextView
+            android:id="@+id/vsaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/vtotal"
+            android:layout_alignBottom="@+id/vtotal"
+            android:layout_alignLeft="@+id/saldo"
+            android:text="€ 0.00" />
+
+        <TextView
+            android:id="@+id/saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="49dp"
+            android:text="Saldo" />
+
+        <TextView
+            android:id="@+id/total"
             android:layout_width="116dp"
             android:layout_height="46dp"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/button1"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageButton1"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button1"
-            android:layout_alignBottom="@+id/button1"
-            android:layout_alignLeft="@+id/textView4"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button1"
-            android:layout_alignBottom="@+id/button1"
-            android:layout_alignLeft="@+id/textView1"
-            android:text="TextView" />
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/vsaldo"
+            android:text="Total" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/bestel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="Button" />
+            android:layout_marginRight="15dp"
+            android:text="Bestel" />
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.ak.project;
+package com.ak.project.db;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.ak.project.model.Club;
 
 import android.os.AsyncTask;
 import android.util.Log;

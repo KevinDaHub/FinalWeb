@@ -1,10 +1,13 @@
-package com.ak.project;
+package com.ak.project.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabPagerAdapter extends FragmentPagerAdapter {
+
+	String id = "1";
+	String type = "";
 
 	public TabPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -16,16 +19,13 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			// Top Rated fragment activity
-			return new MenuFragment();
+			return new BeerFragment();
 		case 1:
-			// Games fragment activity
-			return new MenuFragment();
+			return new WineFragment();
 		case 2:
-			// Movies fragment activity
-			return new MenuFragment();
+			return new StrongFragment();
 		case 3:
-			return new MenuFragment();
+			return new SoftFragment();
 		}
 
 		return null;
@@ -35,6 +35,14 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 	public int getCount() {
 		// get item count - equal to number of tabs
 		return 4;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }

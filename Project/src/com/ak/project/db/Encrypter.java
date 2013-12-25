@@ -1,4 +1,4 @@
-package com.ak.project;
+package com.ak.project.db;
 
 import java.io.Serializable;
 import java.security.MessageDigest;
