@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import com.ak.project.db.Encrypter;
 import com.ak.project.db.GetClubs;
 import com.ak.project.db.GetUser;
+import com.ak.project.db.UpdateSaldo;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Quickorder implements Serializable {
 
 	private User user;
-	private Encrypter enc;
 	private ArrayList<Club> clubs;
 	private Club selectedClub;
 
@@ -37,6 +38,17 @@ public class Quickorder implements Serializable {
 	}
 	public String getTotal(){
 		return ""+ selectedClub.getTotal();
+	}
+	public boolean updateSaldo(double total){
+		boolean success = false;
+		if(total < user.getSaldo()){
+			double saldo = user.getSaldo() - total;
+			user.setSaldo(saldo);
+			UpdateSaldo us = new UpdateSaldo(user.getName(), user.getSaldo());
+			us.execute();
+			success = true;
+		}
+		return success;
 	}
 
 	public String min(String naam) {

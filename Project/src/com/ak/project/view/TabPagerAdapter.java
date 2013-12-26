@@ -8,10 +8,14 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
 	String id = "1";
 	String type = "";
+	BeerFragment bf = new BeerFragment();
+	WineFragment wf = new WineFragment();
+	StrongFragment stf = new StrongFragment();
+	SoftFragment sof = new SoftFragment();
 
 	public TabPagerAdapter(FragmentManager fm) {
 		super(fm);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -19,13 +23,13 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			return new BeerFragment();
+			return bf;
 		case 1:
-			return new WineFragment();
+			return wf;
 		case 2:
-			return new StrongFragment();
+			return stf;
 		case 3:
-			return new SoftFragment();
+			return sof;
 		}
 
 		return null;

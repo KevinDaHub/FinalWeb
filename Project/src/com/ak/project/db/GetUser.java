@@ -60,7 +60,7 @@ public class GetUser extends AsyncTask<String, String, String> implements
 				String email = userobject.getString("email");
 				double saldo = userobject.getDouble("saldo");
 				String pass = userobject.getString("password");
-				this.user = new User(surname, naam, pass, email, saldo);
+				this.user = new User(naam, surname, pass, email, saldo);
 			}
 
 		} catch (JSONException e) {
