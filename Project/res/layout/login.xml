@@ -8,16 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity" >
 
-    <Button
-        android:id="@+id/bestel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp"
-        android:onClick="logIn"
-        android:text="Log in" />
-
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
@@ -51,5 +41,25 @@
         android:layout_marginTop="31dp"
         android:text="QuickOrder"
         android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/bestel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="38dp"
+        android:onClick="logIn"
+        android:text="Log in" />
+
+    <Button
+        android:id="@+id/offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bestel"
+        android:layout_alignBottom="@+id/bestel"
+        android:layout_alignRight="@+id/editText1"
+        android:onClick="offline"
+        android:text="Go offline" />
 
 </RelativeLayout>

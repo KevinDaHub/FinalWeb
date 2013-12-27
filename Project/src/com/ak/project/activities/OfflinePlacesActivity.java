@@ -2,22 +2,18 @@ package com.ak.project.activities;
 
 import java.util.ArrayList;
 
-import com.ak.project.R;
-import com.ak.project.R.id;
-import com.ak.project.R.layout;
-import com.ak.project.model.Quickorder;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class PlacesActivity extends Activity {
+import com.ak.project.R;
+import com.ak.project.model.Quickorder;
 
+public class OfflinePlacesActivity extends Activity{
 	private ArrayList<String> plaatsen = new ArrayList<String>();
 	private Quickorder quickorder;
 
@@ -26,7 +22,7 @@ public class PlacesActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			quickorder.setMenuList(((TextView) v).getText().toString());
-			Intent myIntent = new Intent(PlacesActivity.this, TabActivity.class);
+			Intent myIntent = new Intent(OfflinePlacesActivity.this, OfflineTabActivity.class);
 			Bundle data = new Bundle();
 			data.putSerializable("quickorder", quickorder);
 			myIntent.putExtras(data);

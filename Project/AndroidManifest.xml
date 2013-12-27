@@ -27,7 +27,8 @@
         </activity>
         <activity android:name="com.ak.project.activities.PlacesActivity" />
         <activity android:name="com.ak.project.activities.TabActivity" />
-        <activity android:name=".MenuActivity" />
+        <activity android:name="com.ak.project.activities.OfflinePlacesActivity" />
+        <activity android:name="com.ak.project.activities.OfflineTabActivity" />
     </application>
 
 </manifest>

@@ -8,17 +8,14 @@ import com.ak.project.db.GetClubs;
 import com.ak.project.db.GetUser;
 import com.ak.project.db.UpdateSaldo;
 
-import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class Quickorder implements Serializable {
 
-	private User user;
+	private User user = null;
 	private ArrayList<Club> clubs;
 	private Club selectedClub;
 
 	public Quickorder() {
+		clubs = new ArrayList<Club>();
 	}
 
 	public String login(String name, String password) {
@@ -33,15 +30,18 @@ public class Quickorder implements Serializable {
 		}
 		return login;
 	}
-	public String getCurrentSaldo(){
-		return ""+user.getSaldo();
+
+	public String getCurrentSaldo() {
+		return "" + user.getSaldo();
 	}
-	public String getTotal(){
-		return ""+ selectedClub.getTotal();
+
+	public String getTotal() {
+		return "" + selectedClub.getTotal();
 	}
-	public boolean updateSaldo(double total){
+
+	public boolean updateSaldo(double total) {
 		boolean success = false;
-		if(total < user.getSaldo()){
+		if (total < user.getSaldo()) {
 			double saldo = user.getSaldo() - total;
 			user.setSaldo(saldo);
 			UpdateSaldo us = new UpdateSaldo(user.getName(), user.getSaldo());
@@ -64,16 +64,45 @@ public class Quickorder implements Serializable {
 	}
 
 	public void importClubs() {
-		GetClubs clubsdb = new GetClubs();
-		clubs = clubsdb.getclubs();
+		if (user != null) {
+			GetClubs clubsdb = new GetClubs();
+			clubs = clubsdb.getclubs();
+		} else {
+			Club c1 = new Club("tes1t", "ergens", "1");
+			Club c2 = new Club("test2", "ergens", "2");
+			Club c3 = new Club("test3", "ergens", "3");
+			Club c4 = new Club("test4", "ergens", "4");
+			clubs.add(c1);
+			clubs.add(c2);
+			clubs.add(c3);
+			clubs.add(c4);
+
+		}
 
 	}
 
 	public void setMenuList(String naam) {
-		for (Club club : clubs) {
-			if (club.getNaam().equals(naam)) {
-				selectedClub = club;
-				selectedClub.importMenuList();
+		if (user != null) {
+			for (Club club : clubs) {
+				if (club.getNaam().equals(naam)) {
+					selectedClub = club;
+					selectedClub.importMenuList();
+				}
+			}
+		}else{
+			for(Club club : clubs){
+				if(club.getNaam().equals(naam)){
+					selectedClub = club;
+					ArrayList<Beverage> menu = new ArrayList<Beverage>();
+					menu.add(new Beverage("1", "cola", "soft", 1.80));
+					menu.add(new Beverage("2", "heineken", "soft", 1.80));
+					menu.add(new Beverage("3", "stela 25cl", "bier", 1.80));
+					menu.add(new Beverage("4", "eristoff w", "strong", 3));
+					menu.add(new Beverage("5", "chateau", "wijn", 2.5));
+					menu.add(new Beverage("6", "fanta", "soft", 1.80));
+					menu.add(new Beverage("7", "whiskey", "strong", 3.5));					
+					club.setMenu(menu);
+				}
 			}
 		}
 	}
@@ -96,5 +125,9 @@ public class Quickorder implements Serializable {
 
 	public void setSelectedClub(Club selectedClub) {
 		this.selectedClub = selectedClub;
+	}
+
+	public User getUser() {
+		return user;
 	}
 }
