@@ -13,7 +13,7 @@ public class Club implements Serializable {
 	private String id;
 	private ArrayList<Beverage> bestellingen;
 
-	public Club(String naam, String adres, String id) {
+	public Club(String naam, String adres) {
 		setNaam(naam);
 		setAdres(adres);
 		setId(id);

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ACF0FF"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -16,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="112dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="text" >
 
         <requestFocus />
@@ -29,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <TextView
@@ -39,7 +40,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp"
-        android:text="QuickOrder"
+        android:text="@string/quickorder"
         android:textSize="50sp" />
 
     <Button
@@ -50,7 +51,7 @@
         android:layout_below="@+id/editText2"
         android:layout_marginTop="38dp"
         android:onClick="logIn"
-        android:text="Log in" />
+        android:text="@string/log_in" />
 
     <Button
         android:id="@+id/offline"
@@ -60,6 +61,6 @@
         android:layout_alignBottom="@+id/bestel"
         android:layout_alignRight="@+id/editText1"
         android:onClick="offline"
-        android:text="Go offline" />
+        android:text="@string/go_offline" />
 
 </RelativeLayout>

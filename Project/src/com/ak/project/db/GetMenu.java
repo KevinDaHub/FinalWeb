@@ -61,7 +61,8 @@ public class GetMenu extends AsyncTask<String, String, String> implements
 					String type = jsonbeverage.getString("type");
 					double price = jsonbeverage.getDouble("price");
 					
-					Beverage beverage = new Beverage(id,name,type,price);
+					Beverage beverage = new Beverage(name,type,price);
+					beverage .setId(id);
 					menu.add(beverage);
 
 					

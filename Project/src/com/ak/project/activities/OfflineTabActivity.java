@@ -1,14 +1,11 @@
 package com.ak.project.activities;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import com.ak.project.R;
-import com.ak.project.db.SendMail;
 import com.ak.project.model.Beverage;
 import com.ak.project.model.Quickorder;
 import com.ak.project.view.OfflineTabPagerAdapter;
-import com.ak.project.view.TabPagerAdapter;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;

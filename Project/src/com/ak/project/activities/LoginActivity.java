@@ -1,20 +1,15 @@
 package com.ak.project.activities;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 import com.ak.project.R;
@@ -60,7 +55,7 @@ public class LoginActivity extends Activity {
 		String login = quickorder.login(name, password);
 		if (login.equals("ok")) {
 			quickorder.importClubs();
-			//writeXml();
+			writeXml();
 			Intent myIntent = new Intent(this, PlacesActivity.class);
 			Bundle data = new Bundle();
 			data.putSerializable("quickorder", quickorder);
@@ -83,27 +78,31 @@ public class LoginActivity extends Activity {
 					"http://xmlpull.org/v1/doc/features.html#indent-output",
 					true);
 			xml.startTag(null, "quickorder");
-			xml.startTag(null, "club");
-			xml.startTag(null, "name");
-			xml.text("rio");
-			xml.endTag(null, "name");
-			xml.startTag(null, "adres");
-			xml.text("sint katelijne");
-			xml.endTag(null, "adres");
-			xml.startTag(null, "menu");
-			xml.startTag(null, "drank");
-			xml.startTag(null, "name");
-			xml.text("cola");
-			xml.endTag(null, "name");
-			xml.startTag(null, "type");
-			xml.text("soft");
-			xml.endTag(null, "type");
-			xml.startTag(null, "prijs");
-			xml.text("1.8");
-			xml.endTag(null, "prijs");
-			xml.endTag(null, "drank");
-			xml.endTag(null, "menu");
-			xml.endTag(null, "club");
+			for (Club club : quickorder.getClublist()) {
+				xml.startTag(null, "club");
+				xml.startTag(null, "clubname");
+				xml.text(club.getNaam());
+				xml.endTag(null, "clubname");
+				xml.startTag(null, "adres");
+				xml.text(club.getAdres());
+				xml.endTag(null, "adres");
+				xml.startTag(null, "menu");
+				for (Beverage beverage : club.getMenu()) {
+					xml.startTag(null, "drank");
+					xml.startTag(null, "beveragename");
+					xml.text(beverage.getName());
+					xml.endTag(null, "beveragename");
+					xml.startTag(null, "type");
+					xml.text(beverage.getType());
+					xml.endTag(null, "type");
+					xml.startTag(null, "prijs");
+					xml.text(beverage.getPrice() + "");
+					xml.endTag(null, "prijs");
+					xml.endTag(null, "drank");
+				}
+				xml.endTag(null, "menu");
+				xml.endTag(null, "club");
+			}
 			xml.endTag(null, "quickorder");
 			xml.endDocument();
 
@@ -128,71 +127,86 @@ public class LoginActivity extends Activity {
 	}
 
 	private void readXML() {
-		int currentSection = 0;
-		String name ="";
-		String adres = "";
-		ArrayList<Beverage> menu = new ArrayList<Beverage>();
-		ArrayList<Club> clublist = new ArrayList<Club>();
+		XmlPullParser parser = Xml.newPullParser();
 		try {
-			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-			factory.setNamespaceAware(true);
-			XmlPullParser xmlparser = factory.newPullParser();
-
 			File file = new File(getFilesDir(), "quickorder.xml");
+			InputStream is = new FileInputStream(file);
+			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			parser.setInput(is, null);
+			parseXML(parser);
 
-			FileInputStream fis = new FileInputStream(file);
-			xmlparser.setInput(new InputStreamReader(fis));
-			int eventType = xmlparser.getEventType();
-			String nodeName = xmlparser.getName();
-			if (nodeName.contentEquals("quickorder")) {
-				currentSection = 1;
-			}
-
-			switch (currentSection) {
-			case 0:
-				break;
-			case 1:
-				if(nodeName.contentEquals("name")){
-					name = xmlparser.nextText();
-				}
-				if(nodeName.contentEquals("adres")){
-					adres = xmlparser.nextText();
-					Club club = new Club(name, adres, "");
-					clublist.add(club);
-					
-				}
-				if(nodeName.contentEquals("menu")){
-					currentSection = 2;
-				}
-			}
-
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+		}
+
+	}
+
+	private void parseXML(XmlPullParser parser) {
+		try {
+			ArrayList<Club> clubs = null;
+			ArrayList<Beverage>menu = null;
+			Beverage currentbeverage = null;
+			int eventType = parser.getEventType();
+			Club currentclub = null;
+			String clubname = null;
+			String clubadres = null;
+			String beveragename = null;
+			String beveragetype = null;
+			double beveragepice;
+			while(eventType != XmlPullParser.END_DOCUMENT){
+				String name = null;
+				switch(eventType){
+				case XmlPullParser.START_DOCUMENT:
+					clubs = new ArrayList<Club>();
+					break;
+				case XmlPullParser.START_TAG:
+					name = parser.getName();
+					if(name == "club" && currentclub != null){
+						currentclub.setMenu(menu);
+						clubs.add(currentclub);
+						currentclub = null;
+					}else if(name == "clubname"){
+						clubname = parser.nextText();
+					}else if(name =="adres"){
+						clubadres = parser.nextText();
+						currentclub = new Club(clubname, clubadres);
+					}else if(name=="menu" && menu != null){
+						menu = new ArrayList<Beverage>();
+					}else if(name == "drank" && currentbeverage != null){
+						currentbeverage = null;
+					}else if(name == "beveragename"){
+						beveragename = parser.nextText();
+					}else if(name == "type"){
+						beveragetype = parser.nextText();
+						
+					}
+					else if(name =="prijs"){
+						beveragepice = Double.parseDouble(parser.nextText());
+						currentbeverage = new Beverage(beveragename, beveragetype, beveragepice);
+						menu.add(currentbeverage);
+						
+					}
+					break;
+				}
+				eventType = parser.next();
+				
+			}
+			quickorder.setClubs(clubs);
+		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		/*
-		 * String tekst = ""; try { InputStream is =
-		 * openFileInput("quickorder.xml"); if(is != null){ InputStreamReader
-		 * isreader = new InputStreamReader(is); BufferedReader buffreader = new
-		 * BufferedReader(isreader); String recieve = ""; StringBuilder sBuilder
-		 * = new StringBuilder(); while((recieve = buffreader.readLine())!=
-		 * null){ sBuilder.append(recieve); } is.close(); tekst =
-		 * sBuilder.toString(); Log.i("gelezen xml", tekst); } } catch
-		 * (FileNotFoundException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); }
-		 */
 	}
 
 	public void offline(View v) {
-		//readXML();
+		readXML();
 		quickorder.importClubs();
 		Intent myIntent = new Intent(this, OfflinePlacesActivity.class);
 		Bundle data = new Bundle();

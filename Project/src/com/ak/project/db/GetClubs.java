@@ -57,7 +57,8 @@ try {
 			String name = jsonclub.getString("name");
 			String address = jsonclub.getString("address");
 			
-			Club club = new Club(name, address, id);
+			Club club = new Club(name, address);
+			club.setId(id);
 			clubs.add(club);
 			
 		}

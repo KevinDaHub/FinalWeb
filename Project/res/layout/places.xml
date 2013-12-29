@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#ACF0FF" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="302dp"
         android:layout_height="wrap_content"
-        android:text="Clubs"
+        android:text="@string/clubs"
         android:textSize="35sp"
         android:layout_gravity="center_horizontal"
         android:gravity="center" />
@@ -22,7 +23,7 @@
         <LinearLayout
             android:id="@+id/list"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>

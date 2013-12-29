@@ -10,7 +10,7 @@ public class Beverage implements Serializable{
 	private double price;
 	private int amount = 0;
 	
-	public Beverage(String id,String name,String type,double price){
+	public Beverage(String name,String type,double price){
 		setName(name);
 		setPrice(price);
 		setId(id);
